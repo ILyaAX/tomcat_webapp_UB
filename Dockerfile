@@ -9,5 +9,7 @@ WORKDIR /home/app
 RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
 RUN cd ./boxfuse-sample-java-war-hello && mvn package
 RUN cp ./boxfuse-sample-java-war-hello/target/hello-1.0.war /var/lib/tomcat9/webapps/hello-1.0.war
+RUN export CATALINA_BASE=/usr/share/tomcat9/
+RUN export CATALINA_HOME=/usr/share/tomcat9/
 EXPOSE 8080
 CMD ["/usr/share/tomcat9/bin/catalina.sh", "run"]
