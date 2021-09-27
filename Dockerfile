@@ -12,5 +12,7 @@ RUN cp ./boxfuse-sample-java-war-hello/target/hello-1.0.war /var/lib/tomcat9/web
 RUN export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
 RUN export CATALINA_BASE=/usr/share/tomcat9/
 RUN export CATALINA_HOME=/usr/share/tomcat9/
+RUN mkdir /usr/share/tomcat9/temp
+RUN cp -r /usr/share/tomcat9/etc/ /usr/share/tomcat9/conf/
 EXPOSE 8080
 CMD ["/usr/share/tomcat9/bin/catalina.sh", "run"]
