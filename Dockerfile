@@ -9,6 +9,7 @@ WORKDIR /home/app
 RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
 RUN cd ./boxfuse-sample-java-war-hello && mvn package
 RUN cp ./boxfuse-sample-java-war-hello/target/hello-1.0.war /var/lib/tomcat9/webapps/hello-1.0.war
+RUN export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
 RUN export CATALINA_BASE=/usr/share/tomcat9/
 RUN export CATALINA_HOME=/usr/share/tomcat9/
 EXPOSE 8080
