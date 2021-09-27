@@ -1,0 +1,2 @@
+docker build -t tomwebappUB https://github.com/ILyaAX/tomcat_webapp_UB.git#main:
+docker run --rm -d --name tomcat_webapp -p 8080:8080 tomwebappUB
