@@ -1,18 +1,15 @@
 FROM ubuntu:20.04
-RUN apt update
-RUN apt install default-jdk -y
-RUN apt install maven -y
-RUN apt install tomcat9 -y
-RUN apt install git -y
-RUN mkdir /home/app
-WORKDIR /home/app
-RUN git clone https://github.com/boxfuse/boxfuse-sample-java-war-hello.git
-RUN cd ./boxfuse-sample-java-war-hello && mvn package
-RUN cp ./boxfuse-sample-java-war-hello/target/hello-1.0.war /var/lib/tomcat9/webapps/ROOT.war
-#RUN export JAVA_HOME=/usr/lib/jvm/java-1.11.0-openjdk-amd64
-#RUN export CATALINA_BASE=/usr/share/tomcat9/
-#RUN export CATALINA_HOME=/usr/share/tomcat9/
-RUN mkdir /usr/share/tomcat9/temp
-RUN cp -r /usr/share/tomcat9/etc/ /usr/share/tomcat9/conf/
+RUN apt-get update
+RUN apt-get install default-jdk -y
+RUN apt-get install maven -y
+RUN apt-get install git -y
+RUN apt-get install wget -y
+RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.53/bin/apache-tomcat-9.0.53.tar.gz -P /tmp
+RUN tar -xvzf /tmp/apache-tomcat-9.0.53.tar.gz -C /opt
+RUN export CATALINA_BASE=/opt/apache-tomcat-9.0.53
+RUN export CATALINA_HOME=/opt/apache-tomcat-9.0.53
+RUN git clone https://github.com/daticahealth/java-tomcat-maven-example.git /root/tcathw/
+RUN mvn clean package --file /root/tcathw/
+RUN cp /root/tcathw/target/java-tomcat-maven-example.war /opt/apache-tomcat-9.0.53/webapps/
 EXPOSE 8080
-CMD ["/usr/share/tomcat9/bin/catalina.sh", "run"]
+CMD ["/opt/apache-tomcat-9.0.53/bin/catalina.sh", "run"]
